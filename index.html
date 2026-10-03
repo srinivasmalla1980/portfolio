@@ -4,114 +4,783 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Srinivas Malla - AI Architect & Knowledge Graph Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-@page{size:A4;margin:14mm}*{box-sizing:border-box}body{margin:0;background:#eef1f5;color:#20252b;font-family:Arial,Helvetica,sans-serif;line-height:1.48;font-size:10.5pt}.page{width:210mm;max-width:100%;margin:24px auto;background:#fff;padding:18mm 17mm;box-shadow:0 2px 12px rgba(0,0,0,.12)}header{border-bottom:2px solid #17365d;padding-bottom:12px;margin-bottom:18px}h1{margin:0;color:#17365d;font-size:22pt;letter-spacing:.3px}.title{margin-top:3px;color:#3f4f63;font-size:13pt;font-weight:700}.contact{margin-top:10px;font-size:9.5pt}a{color:#125ea8;text-decoration:none}a:hover{text-decoration:underline}.actions{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}.button{display:inline-block;padding:7px 12px;border-radius:5px;background:#17365d;color:white;font-weight:700;font-size:9pt}.button.linkedin{background:#0a66c2}h2{color:#17365d;font-size:13pt;border-bottom:1px solid #cbd5e1;padding-bottom:4px;margin:19px 0 9px;letter-spacing:.2px}h3{color:#222;font-size:11pt;margin:12px 0 3px}p{margin:5px 0 8px}ul{margin:5px 0 10px 19px;padding:0}li{margin-bottom:5px}.job{margin-bottom:14px;break-inside:avoid}.job-title{font-weight:700}.public-label{float:right;color:#4b5563;font-weight:600;font-size:9.5pt}.skill-label{color:#17365d;font-weight:700}.note{background:#f5f7fa;border-left:4px solid #17365d;padding:8px 11px;margin:10px 0}.masked{font-style:italic;color:#4b5563}.actions+.privacy{margin-top:9px;font-size:8.5pt;color:#6b7280}@media print{body{background:white;font-size:10pt}.page{width:auto;margin:0;padding:0;box-shadow:none}.actions{display:none}a{color:inherit}}@media(max-width:800px){body{background:white}.page{margin:0;padding:24px}.public-label{float:none;display:block;margin-top:2px}}
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --border-color: #334155;
+  --border-hover: #475569;
+  --accent-cyan: #38bdf8;
+  --accent-purple: #818cf8;
+  --accent-emerald: #34d399;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --glass-glow: rgba(56, 189, 248, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Background Deco */
+.bg-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(129, 140, 248, 0.12) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* Header / Hero Section */
+header {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 48px;
+  margin-bottom: 32px;
+  position: relative;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: var(--accent-cyan);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-emerald);
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-item a {
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-item a:hover {
+  color: var(--accent-cyan);
+}
+
+/* Certifications */
+.certs-container {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.certs-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.certs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cert-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cert-card:hover {
+  border-color: var(--accent-cyan);
+  color: var(--text-main);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: #0a66c2;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #084e96;
+  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.4);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--border-color);
+}
+
+.privacy-note {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* Layout Grid */
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+/* Sections */
+section {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+section h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+  border-radius: 2px;
+}
+
+/* Summary Cards */
+.summary-text {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.summary-text strong {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+/* Skills Cards Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.25s ease;
+}
+
+.skill-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px var(--glass-glow);
+}
+
+.skill-card-title {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skill-card-desc {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* Tech Tags Cloud */
+.tech-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-group {
+  margin-bottom: 20px;
+}
+
+.tech-group-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-purple);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tech-tag {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid var(--border-color);
+  color: #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Experience Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 48px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.job-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.job-badge {
+  font-size: 0.8rem;
+  background: rgba(129, 140, 248, 0.15);
+  color: var(--accent-purple);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.job-details {
+  list-style: none;
+}
+
+.job-details li {
+  position: relative;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.job-details li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-cyan);
+  font-weight: bold;
+}
+
+.job-details strong {
+  color: var(--text-main);
+}
+
+/* Industries Pills */
+.industry-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.industry-pill {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.industry-pill:hover {
+  border-color: var(--accent-purple);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px 12px 40px;
+  }
+  
+  header, section {
+    padding: 24px;
+    border-radius: 14px;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+  }
+
+  .timeline::before {
+    left: 11px;
+  }
+
+  .timeline-item {
+    padding-left: 32px;
+  }
+
+  .timeline-dot {
+    left: 3px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .job-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .bg-gradient, .actions {
+    display: none;
+  }
+  header, section {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: black;
+    -webkit-text-fill-color: initial;
+  }
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-<header>
-<h1>SRINIVAS MALLA</h1>
-<div class="title">AI Architect &amp; Knowledge Graph Architect</div>
-<div class="contact">
-<strong>Master of Science (Computer Science)</strong> – 2003, Andhra University<br>
-Hyderabad, Telangana, India
-<a href="mailto:srinivasmalla08@gmail.com">srinivasmalla08@gmail.com</a>
+<div class="bg-gradient"></div>
+
+<div class="container">
+  
+  <!-- Header / Hero -->
+  <header>
+    <div class="hero-content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        20+ Years Enterprise Experience
+      </div>
+      <h1>SRINIVAS MALLA</h1>
+      <div class="title">AI Architect & Knowledge Graph Architect</div>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          🎓 <strong>M.Sc. Computer Science</strong> (Andhra University)
+        </div>
+        <div class="contact-item">
+          📍 Hyderabad, Telangana, India
+        </div>
+        <div class="contact-item">
+          ✉️ <a href="mailto:srinivasmalla08@gmail.com">srinivasmalla08@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="certs-container">
+        <div class="certs-title">Verified Certifications</div>
+        <div class="certs-list">
+          <a class="cert-card" href="https://graphacademy.neo4j.com/c/ef1b580d-c831-4ccc-b989-c237cfd746dd/" target="_blank">
+            ⚡ Neo4j & Generative AI Fundamentals
+          </a>
+          <a class="cert-card" href="https://graphacademy.neo4j.com/c/7d1bd0a7-9363-47a2-9d4d-6119c768f5d7/" target="_blank">
+            🔷 Neo4j Fundamentals
+          </a>
+          <a class="cert-card" href="https://graphacademy.neo4j.com/c/82ef4664-fc1d-4646-8f8d-bd4466d1e8f9/" target="_blank">
+            🔗 Cypher Fundamentals
+          </a>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/srinivasmalla/" target="_blank">
+          LinkedIn Profile
+        </a>
+        <button class="btn btn-secondary" onclick="window.print()">
+          Print / Save PDF
+        </button>
+      </div>
+      <div class="privacy-note">
+        * Public CV version — employer names, client names, and exact employment dates intentionally omitted.
+      </div>
+    </div>
+  </header>
+
+  <div class="layout-grid">
+    
+    <!-- Executive Summary -->
+    <section>
+      <h2>Executive Summary</h2>
+      <p class="summary-text">
+        Senior Architect with <strong>20+ years of expertise</strong> designing enterprise-scale data platforms, distributed services, Cloud solutions, and AI-driven knowledge systems. Deep hands-on proficiency in building backend architectures blending <strong>Knowledge Graphs, Semantic Technologies (RDF, SPARQL, R2RML), Labelled Property Graphs (Neo4j), Relational Databases, Microsoft Foundry, Azure AI Search, Cosmos DB Vector Store, and High-Throughput REST APIs</strong>.
+      </p>
+      <p class="summary-text">
+        Specialized in <strong>Agentic AI Architecture</strong>, multi-agent topologies, deterministic orchestration frameworks, predictive LLM agents, and tool registry architectures. Experienced in building enterprise AI platforms where deterministic orchestration layers coordinate predictive agents to deliver scalable, governed automation using Amazon Bedrock, Azure AI Foundry, and Azure OpenAI.
+      </p>
+      <p class="summary-text">
+        Practicing the <strong>Zero-Copy / Data Federation architecture pattern</strong> to eliminate storage duplication and optimize infrastructure costs.
+      </p>
+    </section>
+
+    <!-- Key Architecture Capabilities -->
+    <section>
+      <h2>Core Architecture Capabilities</h2>
+      <div class="skills-grid">
+        
+        <div class="skill-card">
+          <div class="skill-card-title">Agentic AI Architecture</div>
+          <div class="skill-card-desc">
+            Designs enterprise multi-agent architectures including topology, orchestration patterns, planner/executor models, supervisor agents, and specialized AI workers. Integrates deterministic workflow engines with predictive LLM agents for controlled execution, memory management, and human-in-the-loop governance.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-title">Prompt & Agentic Engineering</div>
+          <div class="skill-card-desc">
+            Architected and built greenfield applications using <strong>OpenCode, GitHub Copilot, and Claude Code</strong>, leveraging custom SKILL.md definitions to establish reusable agent workflows for planning, code generation, debugging, and iterative development.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-title">Enterprise AI & LLM Platforms</div>
+          <div class="skill-card-desc">
+            Architects Generative AI solutions using Microsoft Foundry, Azure AI Search, Amazon Bedrock, Bedrock AgentCore, LangChain, and LlamaIndex. Expertise in foundation model integration, RAG architectures, AI copilots, enterprise knowledge integration, and prompt engineering.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-title">Agent Infrastructure & Security</div>
+          <div class="skill-card-desc">
+            Designs agent ecosystems with tool registries, function calling frameworks, and standardized contracts for secure enterprise capability invocation. Implements external agent authentication, authorization models, API contracts, identity management, and governance.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-title">Cloud & Distributed Systems</div>
+          <div class="skill-card-desc">
+            Extensive experience designing scalable cloud-native architectures using AWS and Azure. Expertise includes microservices, distributed systems, event-driven architecture, API platforms, Domain-Driven Design (DDD), DevSecOps, and high availability.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-title">Knowledge Graphs & Semantics</div>
+          <div class="skill-card-desc">
+            RDF, OWL, SKOS, SPARQL querying & performance tuning, ontology-based data mapping, R2RML transformation workflows. Schema optimization across MSSQL Server, Stardog, Neo4j, and Azure Cosmos DB Vector Stores.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Stack -->
+    <section>
+      <h2>Technical Stack</h2>
+      
+      <div class="tech-group">
+        <div class="tech-group-title">Semantic Technologies</div>
+        <div class="tech-cloud">
+          <span class="tech-tag">RDF</span>
+          <span class="tech-tag">OWL</span>
+          <span class="tech-tag">SKOS</span>
+          <span class="tech-tag">RDFS</span>
+          <span class="tech-tag">SPARQL</span>
+          <span class="tech-tag">R2RML</span>
+        </div>
+      </div>
+
+      <div class="tech-group">
+        <div class="tech-group-title">Databases & Search</div>
+        <div class="tech-cloud">
+          <span class="tech-tag">Neo4j</span>
+          <span class="tech-tag">Stardog</span>
+          <span class="tech-tag">MS SQL Server</span>
+          <span class="tech-tag">Azure Cosmos DB</span>
+          <span class="tech-tag">Elasticsearch</span>
+          <span class="tech-tag">Amazon OpenSearch</span>
+        </div>
+      </div>
+
+      <div class="tech-group">
+        <div class="tech-group-title">Programming & Frameworks</div>
+        <div class="tech-cloud">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">.NET Core</span>
+          <span class="tech-tag">LangChain</span>
+          <span class="tech-tag">LlamaIndex</span>
+        </div>
+      </div>
+
+      <div class="tech-group">
+        <div class="tech-group-title">AI Tooling & Agents</div>
+        <div class="tech-cloud">
+          <span class="tech-tag">AWS Bedrock</span>
+          <span class="tech-tag">Bedrock AgentCore</span>
+          <span class="tech-tag">Azure AI Foundry</span>
+          <span class="tech-tag">GitHub Copilot</span>
+          <span class="tech-tag">Claude Code</span>
+          <span class="tech-tag">OpenCode</span>
+        </div>
+      </div>
+
+      <div class="tech-group">
+        <div class="tech-group-title">Infrastructure & Cloud</div>
+        <div class="tech-cloud">
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Kubernetes</span>
+          <span class="tech-tag">AWS (ECS, Lambda, S3, RDS, Neptune)</span>
+          <span class="tech-tag">Azure AI Search</span>
+          <span class="tech-tag">CI/CD Pipelines</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Experience Timeline -->
+    <section>
+      <h2>Architecture Experience</h2>
+      <div class="timeline">
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="job-header">
+            <div class="job-title">AI Solution Architect</div>
+            <div class="job-badge">Recent Architecture Experience</div>
+          </div>
+          <ul class="job-details">
+            <li>Architected scalable backend data infrastructure and multi-modal knowledge platforms integrating <strong>Knowledge Graphs, Vector Stores, and relational databases</strong> to power AI-driven document intelligence and RAG architectures.</li>
+            <li>Developed an ontology-driven knowledge representation system to model, organize, and establish semantic relationships among domain-specific concepts.</li>
+            <li>Designed and implemented data ingestion pipelines, automated mapping/transformation workflows, and optimized database queries for high-volume enterprise data systems.</li>
+            <li>Integrated semantic search and retrieval strategies leveraging <strong>Elasticsearch and Azure Cosmos DB Vector Database</strong> to enhance semantic retrieval pipelines.</li>
+            <li>Architected secure, production-grade REST APIs and microservices for internal application consumers using Python and cloud-native services.</li>
+            <li>Ensured robust data governance, access controls, and secure handling of sensitive enterprise data (PII/PHI) across multi-tenant environments.</li>
+            <li>Owned containerization, deployment, and monitoring of graph and backend services using Docker, Kubernetes, and AWS infrastructure.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="job-header">
+            <div class="job-title">Technical Architect</div>
+            <div class="job-badge">Enterprise Platform Experience</div>
+          </div>
+          <ul class="job-details">
+            <li>Designed and delivered large-scale enterprise backend platforms across Financial Services and Government domains using microservices, event-driven architectures, Kafka, and robust relational database schemas.</li>
+            <li>Led architecture for high-volume financial data processing engines, ensuring transactional integrity, high availability, and efficient indexing strategies across relational persistence layers.</li>
+            <li>Modernized legacy platforms into cloud-native API ecosystems with high-throughput data distribution, rigorous data validation, and automated integration pipelines.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="job-header">
+            <div class="job-title">Consultant / Technical Lead</div>
+            <div class="job-badge">Enterprise Integration Experience</div>
+          </div>
+          <ul class="job-details">
+            <li>Designed enterprise service architectures, Entity Framework/relational database models, REST APIs, and middleware integration layers for a large-scale healthcare benefits platform.</li>
+            <li>Delivered enterprise finance and engagement management systems.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="job-header">
+            <div class="job-title">Lead Developer / Senior Software Engineer</div>
+            <div class="job-badge">Earlier Career Experience</div>
+          </div>
+          <ul class="job-details">
+            <li>Delivered enterprise finance, engagement management, healthcare, logistics, and manufacturing software solutions.</li>
+            <li>Developed software solutions across multiple industry sectors handling complex business processes and integration requirements.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Industry Domain Experience -->
+    <section>
+      <h2>Industry Domain Expertise</h2>
+      <div class="industry-pills">
+        <div class="industry-pill">💳 Financial Services</div>
+        <div class="industry-pill">🏛️ Government</div>
+        <div class="industry-pill">🏥 Healthcare</div>
+        <div class="industry-pill">🛡️ Insurance</div>
+        <div class="industry-pill">📈 Investment Management</div>
+        <div class="industry-pill">🚚 Logistics</div>
+        <div class="industry-pill">🏭 Manufacturing</div>
+        <div class="industry-pill">💻 Enterprise Technology</div>
+      </div>
+    </section>
+
+  </div>
 </div>
-<div style="margin-top:6px">
-<strong>Certification:</strong>
-<a href="https://graphacademy.neo4j.com/c/ef1b580d-c831-4ccc-b989-c237cfd746dd/" target="_blank">Neo4j &amp; Generative AI Fundamentals</a>,
-<a href="https://graphacademy.neo4j.com/c/7d1bd0a7-9363-47a2-9d4d-6119c768f5d7/" target="_blank">Neo4j Fundamentals</a>,
-<a href="https://graphacademy.neo4j.com/c/82ef4664-fc1d-4646-8f8d-bd4466d1e8f9/" target="_blank">Cypher Fundamentals</a>
-</div>
-<div class="actions">
-<a class="button linkedin" href="https://www.linkedin.com/in/srinivasmalla/" target="_blank">LinkedIn Profile</a>
-<a class="button" href="javascript:window.print()">Print / Save as PDF</a>
-</div>
-<div class="privacy">Public CV version — employer names, client names and exact employment dates intentionally omitted.</div>
-</header>
 
-<section>
-<h2>PROFESSIONAL SUMMARY</h2>
-<p>Senior Architect with 20+ years of expertise designing enterprise-scale data platforms, distributed services, and Cloud solutions, AI-driven knowledge systems. Deep hands-on proficiency in building backend architectures that blend <strong>Knowledge Graphs, Semantic Technologies (RDF, SPARQL, R2RML), Labelled Property Graphs (neo4j), Relational Databases (MSSQL Server), Microsoft Foundry, Microsoft Foundry Agent Service, Azure AI Search, Vector Database Azure Cosmos DB, and High-Throughput REST APIs</strong>, <strong>Microservices, Python, .NET Core, C#, AWS Bedrock, AWS Bedrock Knowledge Bases, Amazon OpenSearch Service, AWS Lambda, GitHub Copilot, OpenCode, ClaudeCode.</strong> Proven track record in orchestrating multi-modal database systems, complex ETL data pipelines, containerized microservices (Docker). Practicing the Zero-Copy / Data Federation architecture pattern to eliminate storage duplication and save cost.</p>
-<p>Agentic AI architecture, designing enterprise multi-agent topologies, agent orchestration frameworks, deterministic workflow engines, predictive LLM agents, tool registry architectures, agent-to-agent communication models, and secure external agent access patterns.</p>
-<p>Experienced in building enterprise AI platforms where deterministic orchestration layers coordinate predictive LLM-powered agents to deliver scalable, reliable, and governed automation. Strong expertise in Generative AI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), AI copilots, and intelligent workflow automation using Amazon Bedrock, Amazon Bedrock AgentCore, Azure AI Foundry, and Azure OpenAI.</p>
-</section>
-
-<section>
-<h2>SKILLS</h2>
-<p><span class="skill-label">Agentic AI Architecture:</span> Designs enterprise multi-agent architectures including agent topology, orchestration patterns, planner/executor models, supervisor agents, router agents, and specialized AI workers. Experienced in designing hybrid architectures where deterministic workflow engines coordinate predictive LLM agents with controlled execution, validation, memory management, and human-in-the-loop governance.</p>
-<p><span class="skill-label">Prompt-Driven &amp; Agentic Engineering:</span> Architected and built a greenfield application using <strong>OpenCode, GitHub Copilot, and Claude Code</strong>, leveraging custom SKILL.md <strong>definitions</strong> to establish reusable agent workflows for architectural planning, code generation, implementation, debugging, and iterative development within VS Code.</p>
-<p><span class="skill-label">Enterprise AI &amp; LLM Platforms:</span> Architects Generative AI solutions using Microsoft Foundry, Microsoft Foundry Agent Services, Azure AI Search, Amazon Bedrock, Bedrock AgentCore, LangChain, and LlamaIndex. Experienced in foundation model integration, RAG architectures, AI copilots, enterprise knowledge integration, prompt engineering, and LLM-powered automation platforms.</p>
-<p><span class="skill-label">Agent Infrastructure &amp; Security:</span> Designs agent ecosystems with tool registries, capability discovery mechanisms, function calling frameworks, and standardized tool contracts, enabling agents to discover, authenticate, and securely invoke enterprise capabilities. Experienced in secure agent communication, external agent authentication, authorization models, API contracts, identity management, observability, and governance for enterprise AI platforms.</p>
-<p><span class="skill-label">Cloud &amp; Distributed Systems Architecture:</span> Extensive experience designing scalable cloud-native architectures using AWS and Azure. Expertise includes microservices, distributed systems, event-driven architecture, API platforms, Domain-Driven Design (DDD), enterprise integration patterns, DevSecOps, and high-availability solutions.</p>
-<p><span class="skill-label">Knowledge Graphs &amp; Semantic Technology:</span> RDF, OWL, SKOS, SPARQL querying &amp; performance tuning, ontology-based data mapping, R2RML transformation workflows. Relational schemas &amp; optimization (MSSQL Server), Graph Database stardog, Neo4j, Vector Database Azure Cosmos DB.</p>
-</section>
-
-<section>
-<h2>TECHNICAL SKILLS</h2>
-<ul>
-<li><strong>Semantic Technologies:</strong> RDF, OWL, SKOS, RDFS, SPARQL</li>
-<li><strong>Databases &amp; Search:</strong> Neo4j, stardog, MS SQL Server, Azure Cosmos DB, Elasticsearch</li>
-<li><strong>Programming &amp; Frameworks:</strong> Python, C#, TypeScript, FastAPI, .NET Core, LangChain</li>
-<li><strong>Data &amp; Integration:</strong> ETL Pipelines, REST APIs, JSON, XML, CSV</li>
-<li><strong>Infrastructure &amp; Cloud:</strong> Docker, AWS (ECS, Lambda, S3, RDS, Neptune), Azure (Cosmos DB, AI Foundry), Azure AI, Microsoft Foundry, Git, CI/CD</li>
-</ul>
-</section>
-
-<section>
-<h2>PROFESSIONAL EXPERIENCE</h2>
-
-<div class="note"><strong>20+ Years of Professional Experience</strong><br>
-Enterprise architecture experience across AI, financial services, government, healthcare, logistics, manufacturing, and enterprise software domains. Specific employer names, client names, locations, and employment dates are intentionally masked in this public version.</div>
-
-<div class="job">
-<h3>AI Solution Architect <span class="public-label">Recent Architecture Experience</span></h3>
-<ul>
-<li>Architected scalable backend data infrastructure and multi-modal knowledge platforms integrating <strong>Knowledge Graphs, Vector Stores, and relational databases</strong> to power AI-driven document intelligence and RAG architectures into a large-scale Enterprise Application.</li>
-<li>Developed an ontology-driven knowledge representation system to model, organize, and establish semantic relationships among domain-specific concepts.</li>
-<li>Built a domain ontology to represent entities, relationships, and concepts, enabling improved semantic search and knowledge discovery.</li>
-<li>Designed and implemented data ingestion pipelines, automated mapping/transformation workflows, and optimized database queries for high-volume enterprise data systems.</li>
-<li>Integrated semantic search and retrieval strategies leveraging <strong>Elasticsearch and vector databases Azure Cosmos DB</strong> to enhance semantic retrieval pipelines.</li>
-<li>Architected secure, production-grade REST APIs and microservices for internal application consumers using Python and cloud-native services.</li>
-<li>Ensured robust data governance, access controls, and secure handling of sensitive enterprise data (PII/PHI) across multi-tenant environments.</li>
-<li>Owned containerization, deployment, and monitoring of graph and backend services using Docker, Kubernetes, and AWS infrastructure.</li>
-</ul>
-</div>
-
-<div class="job">
-<h3>Technical Architect <span class="public-label">Enterprise Architecture Experience</span></h3>
-<ul>
-<li>Designed and delivered large-scale enterprise backend platforms across Financial Services and Government domains using microservices, event-driven architectures, Kafka, and robust relational database schemas.</li>
-<li>Led architecture for high-volume financial data processing engines, ensuring transactional integrity, high availability, and efficient indexing strategies across relational persistence layers.</li>
-<li>Modernized legacy platforms into cloud-native API ecosystems with high-throughput data distribution, rigorous data validation, and automated integration pipelines.</li>
-<li>Worked across multiple enterprise client environments spanning financial services, government, technology, insurance, and investment domains.</li>
-</ul>
-</div>
-
-<div class="job">
-<h3>Consultant / Technical Lead <span class="public-label">Enterprise Integration Experience</span></h3>
-<ul>
-<li>Designed enterprise service architectures, Entity Framework/relational database models, REST APIs, and middleware integration layers for a large-scale healthcare benefits platform.</li>
-<li>Delivered enterprise finance and engagement management systems.</li>
-</ul>
-</div>
-
-<div class="job">
-<h3>Lead Developer / Senior Software Engineer <span class="public-label">Earlier Career Experience</span></h3>
-<ul>
-<li>Delivered enterprise finance, engagement management, healthcare, logistics, and manufacturing software solutions.</li>
-<li>Developed enterprise software solutions across multiple industry sectors, working with complex business processes and integration requirements.</li>
-</ul>
-</div>
-</section>
-
-<section>
-<h2>INDUSTRY EXPERIENCE</h2>
-<p>Financial Services &nbsp;|&nbsp; Government &nbsp;|&nbsp; Healthcare &nbsp;|&nbsp; Insurance &nbsp;|&nbsp; Investment Management &nbsp;|&nbsp; Logistics &nbsp;|&nbsp; Manufacturing &nbsp;|&nbsp; Enterprise Technology</p>
-</section>
-
-</div>
 </body>
 </html>
