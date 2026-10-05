@@ -498,24 +498,72 @@ section h2::before {
 
 @media print {
   body {
-    background: white;
-    color: black;
+    background: #ffffff !important;
+    color: #000000 !important;
   }
-  .bg-gradient, .actions {
-    display: none;
+
+  .bg-gradient, 
+  .actions, 
+  .badge, 
+  .certs-container,
+  .privacy-note {
+    display: none !important;
   }
+
   header, section {
-    box-shadow: none;
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin-bottom: 16px;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
   }
+
   h1 {
-    color: black;
-    -webkit-text-fill-color: initial;
+    color: #000000 !important;
+    -webkit-text-fill-color: initial !important;
+    font-size: 1.8rem !important;
+  }
+
+  .title {
+    color: #333333 !important;
+  }
+
+  .contact-info, 
+  .contact-info a {
+    color: #333333 !important;
+  }
+
+  .skill-card, 
+  .industry-pill, 
+  .tech-tag {
+    background: transparent !important;
+    border: 1px solid #ccc !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .skill-card-title, 
+  .tech-group-title {
+    color: #000000 !important;
+  }
+
+  .timeline::before {
+    background: #ccc !important;
+  }
+
+  .timeline-dot {
+    background: #fff !important;
+    border: 2px solid #000 !important;
+    box-shadow: none !important;
+  }
+
+  .job-badge {
+    background: transparent !important;
+    border: 1px solid #666 !important;
+    color: #333 !important;
   }
 }
+
 </style>
 </head>
 <body>
