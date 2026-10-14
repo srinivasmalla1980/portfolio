@@ -17,7 +17,7 @@ jobs:
 
       - name: Fetch traffic data
         env:
-          GHTOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHTOKEN: ${{ secrets.TRAFFIC_TOKEN }}
           REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
