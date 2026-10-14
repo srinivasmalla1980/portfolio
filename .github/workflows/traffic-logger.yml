@@ -1,0 +1,37 @@
+name: Log Page Views
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+  workflow_dispatch: # Allows you to manually trigger it from the Actions tab
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allows the action to commit data back to your repo
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Fetch traffic data from GitHub API
+      run: |
+        # Create data directory if it doesn't exist
+        mkdir -p stats
+        
+        # Call the GitHub Traffic API
+        curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+             -H "Accept: application/vnd.github.v3+json" \
+             "https://github.com{{ github.repository }}/traffic/views" \
+             > stats/views_latest.json
+
+        # Optional: Append a timestamped log to keep historical data beyond 14 days
+        echo "{\"date\":\"$(date -u +%Y-%m-%d)\",\"data\":$(cat stats/views_latest.json)}" >> stats/history_log.json
+
+    - name: Commit and push tracking logs
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add stats/
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update traffic logs" && git push)
