@@ -23,7 +23,7 @@ jobs:
         curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
              -H "Accept: application/vnd.github.v3+json" \
              -H "User-Agent: github-actions-view-counter" \
-             "https://github.com{{ github.repository }}/traffic/views" \
+             "https://github.com/{{ github.repository }}/traffic/views" \
              > stats/views_latest.json
 
         # Ensure history log file exists
