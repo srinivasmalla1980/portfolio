@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,12 +21,32 @@
   --text-muted: #94a3b8;
   --text-dim: #64748b;
   --glass-glow: rgba(56, 189, 248, 0.08);
+  --font-scale: 1rem;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-color: #cbd5e1;
+  --border-hover: #94a3b8;
+  --accent-cyan: #0284c7;
+  --accent-purple: #6366f1;
+  --accent-emerald: #10b981;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --glass-glow: rgba(2, 132, 199, 0.08);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  font-size: var(--font-scale);
 }
 
 body {
@@ -36,6 +56,7 @@ body {
   line-height: 1.6;
   padding: 0;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Background Deco */
@@ -52,11 +73,56 @@ body {
   pointer-events: none;
 }
 
+[data-theme="light"] .bg-gradient {
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(2, 132, 199, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(99, 102, 241, 0.06) 0%, transparent 40%);
+}
+
+/* Top Utility Bar (Theme & Font Controls) */
+.utility-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px 0;
+}
+
+.utility-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+}
+
+.util-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.util-btn:hover, .util-btn.active {
+  background: var(--accent-cyan);
+  color: #fff;
+}
+
 /* Container */
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 24px 24px 60px;
+  padding: 20px 24px 60px;
 }
 
 /* Header / Hero Section */
@@ -69,7 +135,7 @@ header {
   padding: 24px 32px;
   margin-bottom: 24px;
   position: relative;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
 }
 
 .hero-content {
@@ -100,13 +166,11 @@ header {
   box-shadow: 0 0 6px var(--accent-emerald);
 }
 
-h1 {
+h3 {
   font-size: 2.1rem;
   font-weight: 800;
   letter-spacing: -0.025em;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-main);
   line-height: 1.1;
 }
 
@@ -181,12 +245,13 @@ h1 {
   border-color: var(--accent-cyan);
   color: var(--text-main);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Action Buttons */
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 16px;
 }
@@ -213,6 +278,18 @@ h1 {
 .btn-primary:hover {
   background: #084e96;
   box-shadow: 0 4px 14px rgba(10, 102, 194, 0.4);
+}
+
+.btn-consult {
+  background: var(--accent-emerald);
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.btn-consult:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(52, 211, 153, 0.4);
 }
 
 .btn-secondary {
@@ -247,7 +324,7 @@ section {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 28px;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
 }
 
 section h2 {
@@ -290,7 +367,7 @@ section h2::before {
 }
 
 .skill-card {
-  background: rgba(15, 23, 42, 0.6);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 16px;
@@ -345,9 +422,9 @@ section h2::before {
 
 .tech-tag {
   font-family: 'JetBrains Mono', monospace;
-  background: rgba(30, 41, 59, 0.9);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
-  color: #e2e8f0;
+  color: var(--text-main);
   padding: 5px 10px;
   border-radius: 6px;
   font-size: 0.82rem;
@@ -472,7 +549,7 @@ section h2::before {
     border-radius: 12px;
   }
 
-  h1 {
+  h3 {
     font-size: 1.8rem;
   }
 
@@ -495,80 +572,24 @@ section h2::before {
     align-items: flex-start;
   }
 }
-
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-
-  .bg-gradient, 
-  .actions, 
-  .badge, 
-  .certs-container,
-  .privacy-note {
-    display: none !important;
-  }
-
-  header, section {
-    box-shadow: none !important;
-    border: none !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin-bottom: 20px !important;
-  }
-
-  h1 {
-    color: #000000 !important;
-    -webkit-text-fill-color: initial !important;
-    font-size: 1.8rem !important;
-  }
-
-  .title {
-    color: #333333 !important;
-  }
-
-  .contact-info, 
-  .contact-info a {
-    color: #333333 !important;
-  }
-
-  .skill-card, 
-  .industry-pill, 
-  .tech-tag {
-    background: transparent !important;
-    border: 1px solid #ccc !important;
-    color: #000000 !important;
-    box-shadow: none !important;
-  }
-
-  .skill-card-title, 
-  .tech-group-title {
-    color: #000000 !important;
-  }
-
-  .timeline::before {
-    background: #ccc !important;
-  }
-
-  .timeline-dot {
-    background: #fff !important;
-    border: 2px solid #000 !important;
-    box-shadow: none !important;
-  }
-
-  .job-badge {
-    background: transparent !important;
-    border: 1px solid #666 !important;
-    color: #333 !important;
-  }
-}
-
 </style>
 </head>
 <body>
 
 <div class="bg-gradient"></div>
+
+<!-- Utility Bar for Theme & Font Controls -->
+<div class="utility-bar">
+  <div class="utility-group">
+    <button class="util-btn" onclick="setFontSize('small')">A-</button>
+    <button class="util-btn active" onclick="setFontSize('normal')" id="default-font-btn">Default</button>
+    <button class="util-btn" onclick="setFontSize('large')">A+</button>
+  </div>
+  <div class="utility-group">
+    <button class="util-btn active" onclick="setTheme('dark')" id="dark-btn">🌙 Dark</button>
+    <button class="util-btn" onclick="setTheme('light')" id="light-btn">☀️ Light</button>
+  </div>
+</div>
 
 <div class="container">
   
@@ -597,41 +618,32 @@ section h2::before {
       <div class="certs-container">
         <div class="certs-title">Verified Certifications</div>
         <div class="certs-list">
-          <a class="cert-card" href="https://graphacademy.neo4j.com/c/ef1b580d-c831-4ccc-b989-c237cfd746dd/" target="_blank">
+          <a class="cert-card" href="https://graphacademy.neo4j.com/c/ef1b580d-c831-4ccc-b989-c237cfd746dd/" target="_blank" rel="noopener noreferrer">
             ⚡ Neo4j & Generative AI Fundamentals
           </a>
-          <a class="cert-card" href="https://graphacademy.neo4j.com/c/7d1bd0a7-9363-47a2-9d4d-6119c768f5d7/" target="_blank">
+          <a class="cert-card" href="https://graphacademy.neo4j.com/c/7d1bd0a7-9363-47a2-9d4d-6119c768f5d7/" target="_blank" rel="noopener noreferrer">
             🔷 Neo4j Fundamentals
           </a>
-          <a class="cert-card" href="https://graphacademy.neo4j.com/c/82ef4664-fc1d-4646-8f8d-bd4466d1e8f9/" target="_blank">
+          <a class="cert-card" href="https://graphacademy.neo4j.com/c/82ef4664-fc1d-4646-8f8d-bd4466d1e8f9/" target="_blank" rel="noopener noreferrer">
             🔗 Cypher Fundamentals
           </a>
         </div>
       </div>
-
       
       <div class="actions">
-        <a class="btn btn-primary"
-           href="#ontology-consulting">
+        <a class="btn btn-primary" href="#ontology-consulting">
           Ontology Consulting
         </a>
       
-        <a class="btn btn-consult"
-           href="YOUR_CALENDLY_BOOKING_URL"
-           target="_blank"
-           rel="noopener noreferrer">
-          Book a Free Consultation
+        <a class="btn btn-consult" href="https://calendly.com/srinivasmalla08" target="_blank" rel="noopener noreferrer">
+          📅 Book a Free Consultation
         </a>
       
-        <a class="btn btn-secondary"
-           href="https://www.linkedin.com/in/srinivasmalla/"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/srinivasmalla/" target="_blank" rel="noopener noreferrer">
           LinkedIn Profile
         </a>
       
-        <button class="btn btn-secondary"
-                onclick="window.print()">
+        <button class="btn btn-secondary" onclick="window.print()">
           Print / Save PDF
         </button>
       </div>
@@ -642,7 +654,7 @@ section h2::before {
     </div>
   </header>
 
-  <div class="layout-grid">
+  <div class="layout-grid" id="ontology-consulting">
     
     <!-- Executive Summary -->
     <section>
@@ -852,6 +864,43 @@ section h2::before {
 
   </div>
 </div>
+
+<script>
+  // Theme Toggle Logic
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    document.getElementById('dark-btn').classList.toggle('active', theme === 'dark');
+    document.getElementById('light-btn').classList.toggle('active', theme === 'light');
+  }
+
+  // Font Size Toggle Logic
+  function setFontSize(size) {
+    let scale = '1rem';
+    if (size === 'small') scale = '0.9rem';
+    if (size === 'large') scale = '1.1rem';
+
+    document.documentElement.style.setProperty('--font-scale', scale);
+    localStorage.setItem('font-size', size);
+
+    document.querySelectorAll('.utility-group .util-btn').forEach(btn => {
+      if (['A-', 'Default', 'A+'].includes(btn.innerText)) {
+        btn.classList.remove('active');
+      }
+    });
+    
+    if (size === 'small') event.target.classList.add('active');
+    if (size === 'normal') document.getElementById('default-font-btn').classList.add('active');
+    if (size === 'large') event.target.classList.add('active');
+  }
+
+  // Load saved preferences on startup
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+  });
+</script>
 
 </body>
 </html>
