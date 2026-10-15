@@ -581,9 +581,9 @@ section h2::before {
 <!-- Utility Bar for Theme & Font Controls -->
 <div class="utility-bar">
   <div class="utility-group">
-    <button class="util-btn" onclick="setFontSize('small')">A-</button>
-    <button class="util-btn active" onclick="setFontSize('normal')" id="default-font-btn">Default</button>
-    <button class="util-btn" onclick="setFontSize('large')">A+</button>
+    <button class="util-btn" onclick="setFontSize('small', this)">A-</button>
+    <button class="util-btn active" onclick="setFontSize('normal', this)" id="default-font-btn">Default</button>
+    <button class="util-btn" onclick="setFontSize('large', this)">A+</button>
   </div>
   <div class="utility-group">
     <button class="util-btn active" onclick="setTheme('dark')" id="dark-btn">🌙 Dark</button>
@@ -635,8 +635,10 @@ section h2::before {
           Ontology Consulting
         </a>
       
-        <a class="btn btn-consult" href="https://calendly.com/srinivasmalla08" target="_blank" rel="noopener noreferrer">
-          📅 Book a Free Consultation
+        <!-- Direct Email Composition Link -->
+        <a class="btn btn-consult" 
+           href="mailto:srinivasmalla08@gmail.com?subject=Consultation%20Request%20-%20AI%20%26%20Knowledge%20Graph%20Architecture&body=Hi%20Srinivas%2C%0A%0AI%20would%20like%20to%20schedule%20a%20consultation%20regarding%3A%0A%0A-%20Project%20Overview%3A%0A-%20Preferred%20Dates%2FTimes%3A%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D">
+          ✉️ Request a Free Consultation
         </a>
       
         <a class="btn btn-secondary" href="https://www.linkedin.com/in/srinivasmalla/" target="_blank" rel="noopener noreferrer">
@@ -876,7 +878,7 @@ section h2::before {
   }
 
   // Font Size Toggle Logic
-  function setFontSize(size) {
+  function setFontSize(size, element) {
     let scale = '1rem';
     if (size === 'small') scale = '0.9rem';
     if (size === 'large') scale = '1.1rem';
@@ -884,15 +886,9 @@ section h2::before {
     document.documentElement.style.setProperty('--font-scale', scale);
     localStorage.setItem('font-size', size);
 
-    document.querySelectorAll('.utility-group .util-btn').forEach(btn => {
-      if (['A-', 'Default', 'A+'].includes(btn.innerText)) {
-        btn.classList.remove('active');
-      }
-    });
-    
-    if (size === 'small') event.target.classList.add('active');
-    if (size === 'normal') document.getElementById('default-font-btn').classList.add('active');
-    if (size === 'large') event.target.classList.add('active');
+    const fontButtons = element ? element.parentElement.querySelectorAll('.util-btn') : [];
+    fontButtons.forEach(btn => btn.classList.remove('active'));
+    if (element) element.classList.add('active');
   }
 
   // Load saved preferences on startup
